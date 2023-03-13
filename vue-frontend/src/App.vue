@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterView } from 'vue-router'
+import Sidebar from './components/Sidebar.vue'
 </script>
 
 <template>
@@ -21,23 +22,7 @@ import { RouterLink, RouterView } from 'vue-router'
       </div>
     </nav>
     <div class="pt-12 lg:flex">
-      <div class="flex flex-col w-full px-4 py-8 overflow-y-auto border-b lg:border-r lg:h-screen lg:w-64">
-        <div class="flex flex-col justify-between mt-6">
-          <aside>
-            <ul>
-              <li>
-                <RouterLink to="/">Home</RouterLink>
-              </li>
-              <li>
-                <RouterLink to="/users">Users</RouterLink>
-              </li>
-              <li>
-                <RouterLink to="/roles">Roles</RouterLink>
-              </li>
-            </ul>
-          </aside>
-        </div>
-      </div>
+      <Sidebar />
       <div class="w-full h-full p-4 m-8 overflow-y-auto">
         <RouterView />
       </div>
