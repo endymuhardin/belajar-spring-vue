@@ -5,6 +5,8 @@ import org.hibernate.annotations.GenericGenerator;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -24,4 +26,8 @@ public class User {
     
     @NotNull
     private Boolean active = true;
+
+    @ManyToOne
+    @JoinColumn(name = "id_role")
+    private Role role;
 }

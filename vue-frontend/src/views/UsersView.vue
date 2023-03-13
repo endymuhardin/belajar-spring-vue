@@ -1,3 +1,21 @@
+<script setup lang="ts">
+    import { ref, onMounted } from 'vue';
+
+    import type {User} from '../stores/types';
+
+    const listUsers = ref([] as User[]);
+
+    async function getData() {
+        const res = await fetch("http://localhost:8080/api/user/");
+        const finalRes = await res.json();
+        listUsers.value = finalRes.content;
+    }
+
+    onMounted(() => {
+        getData();
+    })
+</script>
+
 <template>
     <h1 class="mt-0 mb-2 text-5xl font-medium leading-tight text-primary">
       User List
@@ -20,16 +38,15 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="border-b dark:border-neutral-500">
-                                <td class="whitespace-nowrap px-6 py-4 font-medium">1</td>
-                                <td class="whitespace-nowrap px-6 py-4">user001@yopmail.com</td>
-                                <td class="whitespace-nowrap px-6 py-4">Staff</td>
+                            <tr class="border-b dark:border-neutral-500" v-for="(user, index) in listUsers">
+                                <td class="whitespace-nowrap px-6 py-4 font-medium">{{ index }}</td>
+                                <td class="whitespace-nowrap px-6 py-4">{{ user.username }}</td>
+                                <td class="whitespace-nowrap px-6 py-4">{{ user.role.name }}</td>
                                 <td class="whitespace-nowrap px-6 py-4">
                                     <button type="button" class="inline-block rounded bg-primary px-6 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]">
                                         Edit
                                     </button>
                                     <div class="inline-block h-[2px] min-h-[1em] w-3 self-stretch bg-neutral-100 opacity-0 dark:opacity-0"></div>
-  
                                     <button type="button" class="inline-block rounded bg-primary px-6 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]">
                                         View
                                     </button>
