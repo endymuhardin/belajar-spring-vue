@@ -10,9 +10,14 @@ const router = createRouter({
       component: HomeView
     },
     {
-      path: '/users',
-      name: 'users',
+      path: '/users/list',
+      name: 'usersList',
       component: () => import('../components/Users/UsersList.vue')
+    },
+    {
+      path: '/users/form',
+      name: 'usersForm',
+      component: () => import('../components/Users/UsersForm.vue')
     },
     {
       path: '/roles',
