@@ -1,6 +1,5 @@
 <script setup lang="ts">
     import { ref, onMounted } from 'vue';
-    import type {User} from '../stores/types';
 
     const listUsers = ref([] as User[]);
 
