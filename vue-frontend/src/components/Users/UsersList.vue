@@ -37,7 +37,7 @@
                         </thead>
                         <tbody>
                             <tr class="border-b dark:border-neutral-500" v-for="(user, index) in listUsers">
-                                <td class="whitespace-nowrap px-6 py-4 font-medium">{{ index }}</td>
+                                <td class="whitespace-nowrap px-6 py-4 font-medium">{{ index + 1}}</td>
                                 <td class="whitespace-nowrap px-6 py-4">{{ user.username }}</td>
                                 <td class="whitespace-nowrap px-6 py-4">{{ user.role.name }}</td>
                                 <td class="whitespace-nowrap px-6 py-4">
