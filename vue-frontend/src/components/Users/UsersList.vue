@@ -3,10 +3,10 @@
     import { UserManagementService } from '../../services/user_management';
 
     const service = new UserManagementService();
-    const listUsers = ref([] as User[]);
+    const userPage = ref({} as Page<User>);
 
     onMounted(() => {
-        service.findUsers().then(result => listUsers.value = result)
+        service.findUsers().then(result => userPage.value = result)
     })
 </script>
 
@@ -35,7 +35,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="border-b dark:border-neutral-500" v-for="(user, index) in listUsers">
+                            <tr class="border-b dark:border-neutral-500" v-for="(user, index) in userPage.content">
                                 <td class="whitespace-nowrap px-6 py-4 font-medium">{{ index + 1}}</td>
                                 <td class="whitespace-nowrap px-6 py-4">{{ user.username }}</td>
                                 <td class="whitespace-nowrap px-6 py-4">{{ user.role.name }}</td>
