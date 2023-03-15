@@ -14,6 +14,7 @@ const router = createRouter({
     },
     {
       path: '/users/form/:id*',
+      name: 'usersForm',
       component: () => import('../components/Users/UsersForm.vue'), 
       props: true
     },

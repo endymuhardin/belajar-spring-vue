@@ -8,7 +8,6 @@
 
   const props = defineProps(['id'])
 
-  const idUser = ref(props.id);
   const rolePage = ref({} as Page<Role>);
   const user = ref({
     "username" : "",
@@ -22,8 +21,8 @@
   onMounted(() => {
       service.findRoles().then(result => rolePage.value = result)
 
-      if(idUser != null) {
-        service.findUserById(idUser.value)
+      if(props.id) {
+        service.findUserById(props.id)
         .then(result => {user.value = result});
       }
   })

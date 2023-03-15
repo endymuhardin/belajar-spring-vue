@@ -1,19 +1,13 @@
 <script setup lang="ts">
     import { ref, onMounted } from 'vue';
-    import { useRouter } from 'vue-router';
     import { UserManagementService } from '@/services/user_management';
 
-    const router = useRouter();
     const service = new UserManagementService();
     const userPage = ref({} as Page<User>);
 
     onMounted(() => {
         service.findUsers().then(result => userPage.value = result)
     })
-
-    const edit = (u : User) => {
-        router.push(`/users/form/${u.id}`);
-    }
 
     const deleteStory = async (id: string) => {
       if (!window.confirm("You sure?")) {
@@ -40,12 +34,12 @@
                                 <th scope="col" class="px-6 py-4">Username</th>
                                 <th scope="col" class="px-6 py-4">Role</th>
                                 <th scope="col" class="px-6 py-4">
-                                    <RouterLink to="/users/form">
+                                    <router-link :to="{name: 'usersForm'}">
                                     <button type="button" 
                                             class="inline-block rounded bg-primary px-6 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]">
                                         Add New User
                                     </button>
-                                    </RouterLink>
+                                    </router-link>
                                 </th>
                             </tr>
                         </thead>
@@ -59,10 +53,12 @@
                                     <button type="button" class="inline-block rounded bg-primary px-6 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]">
                                         View
                                     </button>
-                                    <button @click="edit(user)" 
+                                    <router-link :to="{ name: 'usersForm', params:{ id: user.id}}">
+                                    <button
                                         type="button" class="inline-block rounded bg-primary px-6 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]">
                                         Edit
                                     </button>
+                                    </router-link>
                                     <button @click="deleteStory(user.id)" type="button" class="inline-block rounded bg-primary px-6 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]">
                                         Delete
                                     </button>
