@@ -6,6 +6,9 @@
   const service = new UserManagementService();
   const router = useRouter();
 
+  const props = defineProps(['id'])
+
+  const idUser = ref(props.id);
   const rolePage = ref({} as Page<Role>);
   const user = ref({
     "username" : "",
@@ -18,11 +21,15 @@
 
   onMounted(() => {
       service.findRoles().then(result => rolePage.value = result)
+
+      if(idUser != null) {
+        service.findUserById(idUser.value)
+        .then(result => {user.value = result});
+      }
   })
 
   const save = (user: User) => {
-    console.log(user)
-    service.save(user).then(() => {
+    service.saveUser(user).then(() => {
       router.push('/users/list')
     })
   }

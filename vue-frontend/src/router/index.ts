@@ -6,22 +6,19 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'home',
       component: HomeView
     },
     {
       path: '/users/list',
-      name: 'usersList',
       component: () => import('../components/Users/UsersList.vue')
     },
     {
-      path: '/users/form',
-      name: 'usersForm',
-      component: () => import('../components/Users/UsersForm.vue')
+      path: '/users/form/:id*',
+      component: () => import('../components/Users/UsersForm.vue'), 
+      props: true
     },
     {
       path: '/roles',
-      name: 'roles',
       component: () => import('../components/Roles/RolesList.vue')
     }
   ]

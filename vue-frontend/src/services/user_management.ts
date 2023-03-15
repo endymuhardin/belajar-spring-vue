@@ -10,12 +10,12 @@ export class UserManagementService {
             .then(response => Promise.resolve(response.data));
     }
 
-    public async findById(id: string) : Promise<User> {
-        return http.get(this.urlUserList + `/${id}`)
+    public async findUserById(id: string) : Promise<User> {
+        return http.get(this.urlUserList + `${id}`)
             .then(response => Promise.resolve(response.data));
     }
 
-    public async save(user: User) : Promise<User> {
+    public async saveUser(user: User) : Promise<User> {
         if(user.id != null) {
             return http.put(this.urlUserList + `${user.id}`, user)
                 .then(response => Promise.resolve(response.data));
@@ -25,7 +25,7 @@ export class UserManagementService {
         }
     }
 
-    public async deleteById(id: string) : Promise<void> {
+    public async deleteUserById(id: string) : Promise<void> {
         return http.delete(this.urlUserList + `${id}`)
         .then(response => Promise.resolve(response.data));
     }
