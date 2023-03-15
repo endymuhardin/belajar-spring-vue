@@ -3,8 +3,9 @@ package com.muhardin.endy.belajar.springvue.entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToOne;
-import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -18,7 +19,7 @@ public class UserPassword {
     private String id;
 
     @OneToOne
-    @PrimaryKeyJoinColumn(name="id_user", referencedColumnName="id")
+    @MapsId @JoinColumn(name = "id_user")
     private User user;
 
     @NotNull @NotEmpty

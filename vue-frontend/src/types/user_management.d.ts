@@ -1,10 +1,13 @@
 interface Role {
+    id: string
     name: string
 }
 
 interface User {
     id: string
     username: string
+    password: string
+    active: boolean
     role: Role
 }
 

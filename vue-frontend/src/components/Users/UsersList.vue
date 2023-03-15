@@ -1,6 +1,6 @@
 <script setup lang="ts">
     import { ref, onMounted } from 'vue';
-    import { UserManagementService } from '../../services/user_management';
+    import { UserManagementService } from '@/services/user_management';
 
     const service = new UserManagementService();
     const userPage = ref({} as Page<User>);

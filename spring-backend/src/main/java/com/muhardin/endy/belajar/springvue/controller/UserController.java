@@ -16,12 +16,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.muhardin.endy.belajar.springvue.dao.UserDao;
 import com.muhardin.endy.belajar.springvue.dao.UserPasswordDao;
+import com.muhardin.endy.belajar.springvue.dto.UserDto;
 import com.muhardin.endy.belajar.springvue.entity.User;
+import com.muhardin.endy.belajar.springvue.entity.UserPassword;
 
 import jakarta.validation.Valid;
-import lombok.extern.slf4j.Slf4j;
 
-@RestController @Slf4j
+@RestController
 @RequestMapping("/api")
 public class UserController {
 
@@ -40,8 +41,19 @@ public class UserController {
 
     @PostMapping("/user/")
     @ResponseStatus(HttpStatus.CREATED)
-    public User create(@RequestBody @Valid User user){
+    public User create(@RequestBody @Valid UserDto userDto){
+        User user = new User();
+        user.setActive(userDto.getActive());
+        user.setUsername(userDto.getUsername());
+
+        UserPassword userPassword = new UserPassword();
+        userPassword.setPassword(userDto.getPassword());
+
+        user.setRole(userDto.getRole());
+        userPassword.setUser(user);
+
         userDao.save(user);
+        userPasswordDao.save(userPassword);
         return user;
     }
 

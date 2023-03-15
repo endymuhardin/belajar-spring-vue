@@ -3,6 +3,7 @@ import http from "@/services/http_client";
 export class UserManagementService {
 
     private urlUserList = "/api/user/";
+    private urlRoleList = "/api/role/";
 
     public async findUsers() : Promise<Page<User>> {
         return http.get(this.urlUserList)
@@ -27,5 +28,10 @@ export class UserManagementService {
     public async deleteById(id: string) : Promise<void> {
         return http.delete(this.urlUserList + `${id}`)
         .then(response => Promise.resolve(response.data));
+    }
+
+    public async findRoles() : Promise<Page<Role>> {
+        return http.get(this.urlRoleList)
+            .then(response => Promise.resolve(response.data));
     }
 }
