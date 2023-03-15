@@ -1,17 +1,18 @@
 interface Role {
-    name: string;
+    name: string
 }
 
 interface User {
-    username: string;
+    id: string
+    username: string
     role: Role
 }
 
 interface Page<T> {
-    content: T[],
-    number: number,
-    first: boolean,
-    last: boolean,
-    totalElements: number,
+    content: T[]
+    number: number
+    first: boolean
+    last: boolean
+    totalElements: number
     totalPages: number
 }
